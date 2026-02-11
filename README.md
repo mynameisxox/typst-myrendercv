@@ -206,6 +206,7 @@ The template is highly customizable through parameters passed to `rendercv.with(
   header-connections-separator: "",
   header-connections-space-between-connections: 0.5cm,
   header-connections-show-icons: true,
+  header-headline: "Software engineer",
   header-connection: (
     [San Francisco, CA],
     [#link("mailto:john@example.com")[john\@example.com]],

@@ -355,6 +355,7 @@
   header-image: none,
   header-image-width: none,
   header-connections:none,
+  header-headline: none,
   footer: context { "Page " + str(here().page()) + " of " + str(counter(page).final().first()) + "" },
   top-note: "Last updated in " + datetime.today().display(),
   locale-catalog-language: "en",
@@ -448,7 +449,6 @@
     colors-body: colors-body,
     colors-name: colors-name,
     colors-headline: colors-headline,
-    header-connections: header-connections,
     colors-connections: colors-connections,
     colors-section-titles: colors-section-titles,
     colors-links: colors-links,
@@ -480,6 +480,8 @@
     links-underline: links-underline,
     links-show-external-link-icon: links-show-external-link-icon,
     // Header
+    header-connections: header-connections,
+    header-headline: header-headline,
     header-alignment: header-alignment,
     header-photo-width: header-photo-width,
     header-space-below-name: header-space-below-name,
@@ -566,20 +568,20 @@
     #grid(
       columns: (header-photo-width, 1fr),
       column-gutter: 0.5cm,
-      align: (center, left),
+      align: (center, center),
       [
-  #box(
-    clip: true,
-    width: header-photo-width, 
-    height: header-photo-width,  
-    radius: 5%, // rounded corners 
-    // radius: 0.3 * header-photo-width,
-    stroke: 1pt + rgb(0, 0, 0),
-    [
-      #image(header-image, width: 100%, height: 100%)
-    ]
-  )
-],
+        #box(
+          clip: true,
+          width: header-image-width, 
+          height: header-image-width,  
+          radius: 5%, // rounded corners 
+          // radius: 0.3 * header-photo-width,
+          stroke: 1pt + rgb(0, 0, 0),
+          [
+            #image(header-image, width: header-image-width, height: 100%)
+          ]
+        )
+      ],
       [
         #set text(
           font: typography-font-family-name,
@@ -587,9 +589,11 @@
           fill: colors-name,
           weight: if typography-bold-name { 00 } else { 400 },
         )
-        #v(header-space-below-name, weak:false)
+        //#v(header-space-below-name, weak:false)
         
         #name-body
+
+        #headline(header-headline)
         
         #v(header-space-below-name, weak: true)
 
