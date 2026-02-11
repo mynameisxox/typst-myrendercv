@@ -352,6 +352,7 @@
 #let rendercv(
   doc,
   name: "John Doe",
+  header-image: none,
   footer: context { "Page " + str(here().page()) + " of " + str(counter(page).final().first()) + "" },
   top-note: "Last updated in " + datetime.today().display(),
   locale-catalog-language: "en",
@@ -557,6 +558,12 @@
       fill: colors-name,
       weight: if typography-bold-name { 700 } else { 400 },
     )
+    // Header Image
+    #if header-image != none [
+      #h(0.2cm)
+      #image(header-image, width: header-image-width, height: header-image-height)
+      #h(0.2cm)
+    ]
     #let body
     #if typography-small-caps-name {
       body = [#smallcaps(it.body)]
