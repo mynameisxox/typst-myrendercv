@@ -551,8 +551,7 @@
     ligatures: true,
   )
 
-// Main heading (name + image uniquement)
-// Main heading (name + connections à droite de l'image)
+  // Main heading
 #show heading.where(level: 1): it => [
   #set par(spacing: 0pt)
   #set align(header-alignment)
