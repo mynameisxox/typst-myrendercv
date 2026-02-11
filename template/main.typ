@@ -2,18 +2,17 @@
 
 #show: rendercv.with(
   name: "John Doe",
+  header-connections: (
+    [San Francisco, CA],
+    [#link("mailto:john.doe@email.com", icon: false, if-underline: false, if-color: false)[john.doe\@email.com]],
+    [#link("https://rendercv.com/", icon: false, if-underline: false, if-color: false)[rendercv.com]],
+    [#link("https://github.com/rendercv", icon: false, if-underline: false, if-color: false)[github.com\/rendercv]],
+  )
 )
 
 = John Doe
 
 #headline([Engineer])
-
-#connections(
-  [San Francisco, CA],
-  [#link("mailto:john.doe@email.com", icon: false, if-underline: false, if-color: false)[john.doe\@email.com]],
-  [#link("https://rendercv.com/", icon: false, if-underline: false, if-color: false)[rendercv.com]],
-  [#link("https://github.com/rendercv", icon: false, if-underline: false, if-color: false)[github.com\/rendercv]],
-)
 
 == Education
 

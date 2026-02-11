@@ -1,8 +1,10 @@
-# RenderCV
+# MyRenderCV
 
-A CV/resume template for Typst with extensive customization options.
+A CV/resume template for Typst with extensive customization options, this repository is forked from [rendercv/rendercv-typst](https://github.com/rendercv/rendercv-typst), built to add the possibility to add an header image to your CV.
 
 ## Installation
+
+Download the `lib.typ` file from this repository and import it to Typst, you can then copy the `template/main.typ` which will give you a starting point.
 
 ```typst
 #import "@preview/rendercv:0.1.0": *
@@ -14,18 +16,15 @@ A CV/resume template for Typst with extensive customization options.
 #import "@preview/rendercv:0.1.0": *
 
 #show: rendercv.with(
-  name: "John Doe",
+  name: "John Doe", // Not the name shown in title
+  header-connection: (
+    [San Francisco, CA],
+    [#link("mailto:john@example.com")[john\@example.com]],
+    [#link("https://github.com/johndoe")[github.com/johndoe]]
+  )
 )
 
-= John Doe
-
-#headline([Software Engineer])
-
-#connections(
-  [San Francisco, CA],
-  [#link("mailto:john@example.com")[john\@example.com]],
-  [#link("https://github.com/johndoe")[github.com/johndoe]],
-)
+= John Doe - Software Engineer // Title
 
 == Education
 
@@ -66,29 +65,6 @@ A CV/resume template for Typst with extensive customization options.
 ```
 
 ## Components
-
-### Header Components
-
-**`headline(content)`** - Display a headline below your name:
-```typst
-#headline([Data Scientist])
-```
-
-**`connections(...items)`** - Display contact information with automatic line wrapping:
-```typst
-#connections(
-  [New York, NY],
-  [#link("mailto:jane@example.com")[jane\@example.com]],
-  [#link("https://linkedin.com/in/jane")[LinkedIn]],
-)
-```
-
-**`connection-with-icon(icon-name, content)`** - Add FontAwesome icons to connections:
-```typst
-#connection-with-icon("location-dot")[Boston, MA]
-#connection-with-icon("envelope")[email\@example.com]
-#connection-with-icon("github")[github.com/username]
-```
 
 ### Entry Components
 
@@ -230,6 +206,11 @@ The template is highly customizable through parameters passed to `rendercv.with(
   header-connections-separator: "",
   header-connections-space-between-connections: 0.5cm,
   header-connections-show-icons: true,
+  header-connection: (
+    [San Francisco, CA],
+    [#link("mailto:john@example.com")[john\@example.com]],
+    [#link("https://github.com/johndoe")[github.com/johndoe]]
+  )
 )
 ```
 
@@ -274,18 +255,6 @@ The template is highly customizable through parameters passed to `rendercv.with(
   links-show-external-link-icon: false,
 )
 ```
-
-## Examples
-
-The [examples](examples/) directory contains several complete CV examples demonstrating different configurations:
-
-- [`classic.typ`](examples/classic.typ) - Clean layout with full-width section lines
-- [`moderncv.typ`](examples/moderncv.typ) - Left-aligned dates with decorative lines
-- [`engineeringresumes.typ`](examples/engineeringresumes.typ) - Engineering-focused layout
-- [`engineeringclassic.typ`](examples/engineeringclassic.typ) - Classic engineering style
-- [`sb2nov.typ`](examples/sb2nov.typ) - Minimalist design
-
-Each example shows different parameter combinations to achieve various looks.
 
 ## License
 
