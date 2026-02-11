@@ -353,6 +353,8 @@
   doc,
   name: "John Doe",
   header-image: none,
+  header-image-width: none,
+  header-connections:none,
   footer: context { "Page " + str(here().page()) + " of " + str(counter(page).final().first()) + "" },
   top-note: "Last updated in " + datetime.today().display(),
   locale-catalog-language: "en",
@@ -446,6 +448,7 @@
     colors-body: colors-body,
     colors-name: colors-name,
     colors-headline: colors-headline,
+    header-connections: header-connections,
     colors-connections: colors-connections,
     colors-section-titles: colors-section-titles,
     colors-links: colors-links,
@@ -548,32 +551,84 @@
     ligatures: true,
   )
 
-  // Main heading (name):
-  #show heading.where(level: 1): it => [
-    #set par(spacing: 0pt)
-    #set align(header-alignment)
+// Main heading (name + image uniquement)
+// Main heading (name + connections à droite de l'image)
+#show heading.where(level: 1): it => [
+  #set par(spacing: 0pt)
+  #set align(header-alignment)
+  
+  #let name-body = if typography-small-caps-name [
+    smallcaps(it.body)
+  ] else [
+    #it.body
+  ]
+
+  #if header-image != none and header-image-width != none [
+    #grid(
+      columns: (header-photo-width, 1fr),
+      column-gutter: 0.5cm,
+      align: (center, left),
+      [
+  #box(
+    clip: true,
+    width: header-photo-width, 
+    height: header-photo-width,  
+    radius: 5%, // rounded corners 
+    // radius: 0.3 * header-photo-width,
+    stroke: 1pt + rgb(0, 0, 0),
+    [
+      #image(header-image, width: 100%, height: 100%)
+    ]
+  )
+],
+      [
+        #set text(
+          font: typography-font-family-name,
+          size: typography-font-size-name,
+          fill: colors-name,
+          weight: if typography-bold-name { 00 } else { 400 },
+        )
+        #v(header-space-below-name, weak:false)
+        
+        #name-body
+        
+        #v(header-space-below-name, weak: true)
+
+        // If connections
+        #if header-connections != none [
+          #set text(
+            font: typography-font-family-connections,
+            size: typography-font-size-connections,
+            fill: colors-connections,
+            weight: if typography-bold-connections { 700 } else { 400 },
+          )
+          #connections(..header-connections)
+        ]
+      ]
+    )
+  ] else [
+    // Title and connection only
     #set text(
       font: typography-font-family-name,
       size: typography-font-size-name,
       fill: colors-name,
       weight: if typography-bold-name { 700 } else { 400 },
     )
-    // Header Image
-    #if header-image != none [
-      #h(0.2cm)
-      #image(header-image, width: header-image-width, height: header-image-height)
-      #h(0.2cm)
-    ]
-    #let body
-    #if typography-small-caps-name {
-      body = [#smallcaps(it.body)]
-    } else {
-      body = [#it.body]
-    }
-    #body
-    // Vertical space after the name
-    #v(header-space-below-name, weak: true)
+    #name-body
+    #set text(
+            font: typography-font-family-connections,
+            size: typography-font-size-connections,
+            fill: colors-connections,
+            weight: if typography-bold-connections { 700 } else { 400 },
+          )
+          #connections(..header-connections)
   ]
+  
+  #v(header-space-below-name, weak: true)
+]
+
+
+
 
   // Section titles:
   #show heading.where(level: 2): it => [
@@ -712,3 +767,4 @@
     ]
   ]
 ]
+
